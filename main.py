@@ -1,13 +1,33 @@
 import pygame
 from start import start
-s = -1
-# s = -1: Starting Screen
-# s = 0: Level Menu
-# s = [insert positive int x]: Level x
+from background import move_background
 
-gameRunning = True
-while gameRunning:
+width = 1000
+height = int(width * 0.75)
+
+pygame.init()
+screen = pygame.display.set_mode((width, height))
+
+levels = ['levels/test.png']
+levels = [pygame.transform.scale(pygame.image.load(x).convert_alpha(),(width, height)) for x in levels]
+
+level_position = [0, 0]
+yChange = 0
+running = True
+ignore = False
+s = -1
+running = True
+while running:
+    pygame.time.wait(30)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+            
     if s == -1:
         s = start(1000, s)
-    else:
-        break
+    
+    current_level = levels[s]
+    screen.fill((0, 0, 0))
+    level_position, yChange, ignore = move_background(screen, current_level, level_position, yChange, ignore)
+
+    pygame.display.update()
