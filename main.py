@@ -26,9 +26,9 @@ levels = [[[pygame.transform.scale(pygame.image.load('textures/' + str(tile) + '
 
 level_position = [0, 0]
 yChange = 0
-running = True
 ignore = False
 s = -1
+
 running = True
 while running:
     for event in pygame.event.get():
