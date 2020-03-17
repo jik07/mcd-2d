@@ -1,6 +1,11 @@
 import pygame
 
 def move_background(screen, tiles, level_position, yChange, ignore):
+    pw = 30
+    px = (1000/2)-(pw/2)
+    py = (1000/2)-(pw/2)
+    player = pygame.Rect(px, py, pw, pw)
+
     keys = pygame.key.get_pressed()
 
     if yChange == 0 and ignore == False:
@@ -32,4 +37,5 @@ def move_background(screen, tiles, level_position, yChange, ignore):
             if tile != -1:
                 screen.blit(tile, (row.index(tile) * tile.get_height() + level_position[0], tiles.index(row) * tile.get_height() + level_position[1]))
 
+    pygame.draw.rect(screen, (0, 0, 0), player)
     return level_position, yChange, ignore

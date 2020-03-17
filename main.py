@@ -27,9 +27,9 @@ pprint.pprint(levels)
 
 level_position = [0, 0]
 yChange = 0
-running = True
 ignore = False
 s = -1
+
 running = True
 while running:
     pygame.time.wait(30)
