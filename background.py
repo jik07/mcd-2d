@@ -1,10 +1,10 @@
 import pygame
 
-def move_background(screen, picture, level_position, yChange, ignore):
+def move_background(screen, tiles, level_position, yChange, ignore):
     keys = pygame.key.get_pressed()
 
     if yChange == 0 and ignore == False:
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
             yChange = 10
     else:
         yChange -= 1
@@ -14,10 +14,11 @@ def move_background(screen, picture, level_position, yChange, ignore):
             yChange = 0
             ignore = False
 
+
     speed = 0
-    if keys[pygame.K_LEFT]:
+    if keys[pygame.K_LEFT] or keys[pygame.K_a]:
         speed = 10
-    elif keys[pygame.K_RIGHT]:
+    if keys[pygame.K_RIGHT]or keys[pygame.K_d]:
         speed = -10
 
     if yChange != 0 or (yChange == 0 and ignore == True):
@@ -26,5 +27,9 @@ def move_background(screen, picture, level_position, yChange, ignore):
     level_position[0] += speed
     level_position[1] += yChange
 
-    screen.blit(picture, level_position)
+    for row in tiles:
+        for tile in row:
+            if tile != -1:
+                screen.blit(tile, (row.index(tile) * tile.get_height() + level_position[0], tiles.index(row) * tile.get_height() + level_position[1]))
+
     return level_position, yChange, ignore
