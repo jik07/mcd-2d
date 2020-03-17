@@ -13,7 +13,7 @@ start(screen, width, height)
 
 #test image level
 current_level = pygame.transform.scale(
-    pygame.image.load('test.png').convert_alpha(),
+    pygame.image.load('levels/test.png').convert_alpha(),
     (width, height))
 
 level_position = [0, 0]
