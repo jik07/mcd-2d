@@ -9,6 +9,7 @@ height = int(width * 0.75)
 
 pygame.init()
 screen = pygame.display.set_mode((width, height))
+clock = pygame.time.Clock()
 
 levels = []
 for level in range(len(os.listdir('levels'))):
@@ -18,12 +19,10 @@ for level in range(len(os.listdir('levels'))):
 pprint.pprint(levels)
 
 level_l = len(levels[0])
-print(level_l)
 levels = [[[pygame.transform.scale(pygame.image.load('textures/' + str(tile) + '.png').convert_alpha(), (height // level_l, height // level_l)) if tile > 0 else -1 for tile in row]
            for row in level]
            for level in levels]
 
-pprint.pprint(levels)
 
 level_position = [0, 0]
 yChange = 0
@@ -32,13 +31,12 @@ ignore = False
 s = -1
 running = True
 while running:
-    pygame.time.wait(30)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
     if s == -1:
-        s = start(1000, s)
+        s = start(screen, 1000, s)
 
     screen.fill((51, 153, 255))
 
@@ -53,3 +51,5 @@ while running:
         yChange = 0
         ignore = False
         s = 1
+
+    clock.tick(60)

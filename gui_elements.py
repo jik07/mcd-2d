@@ -30,3 +30,12 @@ def button(t, x, y, w, h, ic, ac, cc, tc, ts):
         pygame.draw.rect(screen, ic, (x - w/2, y, w, h))
     text(t, tc, ts, x, y, False, True, h)
     return(ret)
+
+def collision_test(rect, tiles):
+    touching = []
+    for row in tiles:
+        for tile in row:
+            if tile != -1:
+                if rect.colliderect(tile.get_rect()):
+                    touching.append(tile)
+    return touching

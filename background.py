@@ -7,7 +7,7 @@ def move_background(screen, tiles, level_position, yChange, ignore):
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             yChange = 10
     else:
-        yChange -= 1
+        yChange -= 0.5
         if yChange == 0:
             ignore = True
         if yChange < -10:#currently, you can only stay at certain y. change this to set floor
@@ -17,12 +17,12 @@ def move_background(screen, tiles, level_position, yChange, ignore):
 
     speed = 0
     if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-        speed = 10
+        speed = 5
     if keys[pygame.K_RIGHT]or keys[pygame.K_d]:
-        speed = -10
+        speed = -5
 
-    if yChange != 0 or (yChange == 0 and ignore == True):
-        speed *= 1.25
+    if yChange != 0 or (yChange == 0 and ignore == True) or keys[pygame.K_UP] or keys[pygame.K_w]:
+        speed *= 1.5
 
     level_position[0] += speed
     level_position[1] += yChange
