@@ -14,7 +14,6 @@ def move_background(screen, picture, level_position, yChange, ignore):
             yChange = 0
             ignore = False
 
-    print(yChange)
     speed = 0
     if keys[pygame.K_LEFT]:
         speed = 10
