@@ -30,16 +30,18 @@ player_rect = pygame.Rect(500, 300, 40, 40)
 player_movement = [False, False, False]
 running = True
 while running:
+    if s == -1:
+        s = start(screen, 1000, s)
+        print(s)
+    if s == -100:
+        running = False
+        print(s)
+        break
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-            pygame.quit()
             break
-
-
-
-    if s == -1:
-        s = start(screen, 1000, s)
 
     screen.fill((51, 153, 255))
 
@@ -50,3 +52,5 @@ while running:
     pygame.display.update()
 
     clock.tick(60)
+
+pygame.quit()
