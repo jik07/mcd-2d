@@ -20,7 +20,7 @@ for level in range(len(os.listdir('levels'))):
     with open('levels/lvl' + str(level) + '.txt', 'r') as f:
         tiles = [[int(tile) for tile in row.split()] for row in f.readlines()]
         levels.append(tiles)
-pprint.pprint(levels)
+pprint.pprint(tiles)
 
 scroll = [0, 0]
 yChange = 0
@@ -41,7 +41,7 @@ while running:
 
     screen.fill((51, 153, 255))
 
-    scroll, scroll_int, tile_rects = move_background(screen, scroll, levels[s], player_rect)
+    scroll, scroll_int, tile_rects = move_background(screen, scroll, levels[s], player_rect, tiles)
     player_rect, yChange, ignore = move_player(player_rect, yChange, ignore, tile_rects, player_movement)
 
     screen.blit(player_img, (player_rect.x - scroll_int[0], player_rect.y - scroll_int[1]))
