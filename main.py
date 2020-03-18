@@ -2,6 +2,7 @@ import os
 import pygame
 from start import start
 from background import move_background
+from player import move_player
 import pprint
 
 width = 1000
@@ -9,6 +10,10 @@ height = int(width * 0.75)
 
 pygame.init()
 screen = pygame.display.set_mode((width, height))
+player_img = pygame.image.load('potato.png').convert()
+player_img = pygame.transform.scale(player_img, (40, 40))
+
+clock = pygame.time.Clock()
 
 levels = []
 for level in range(len(os.listdir('levels'))):
@@ -17,39 +22,31 @@ for level in range(len(os.listdir('levels'))):
         levels.append(tiles)
 pprint.pprint(levels)
 
-level_l = len(levels[0])
-print(level_l)
-levels = [[[pygame.transform.scale(pygame.image.load('textures/' + str(tile) + '.png').convert_alpha(), (height // level_l, height // level_l)) if tile > 0 else -1 for tile in row]
-           for row in level]
-           for level in levels]
-
-pprint.pprint(levels)
-
-level_position = [0, 0]
+scroll = [0, 0]
 yChange = 0
-running = True
 ignore = False
 s = -1
+player_rect = pygame.Rect(500, 300, 40, 40)
+player_movement = [False, False, False]
 running = True
 while running:
-    pygame.time.wait(30)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+            pygame.quit()
+            break
+
+
 
     if s == -1:
-        s = start(1000, s)
+        s = start(screen, 1000, s)
 
     screen.fill((51, 153, 255))
 
-    current_level = levels[s]
-    level_position, yChange, ignore = move_background(screen, current_level, level_position, yChange, ignore)
+    scroll, scroll_int, tile_rects = move_background(screen, scroll, levels[s], player_rect)
+    player_rect, yChange, ignore = move_player(player_rect, yChange, ignore, tile_rects, player_movement)
 
+    screen.blit(player_img, (player_rect.x - scroll_int[0], player_rect.y - scroll_int[1]))
     pygame.display.update()
 
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_SPACE]:
-        level_position = [0, 0]
-        yChange = 0
-        ignore = False
-        s = 1
+    clock.tick(60)

@@ -1,13 +1,10 @@
 import pygame
 import gui_elements
 
-def start(width, screenvar):
+def start(screen, width, screenvar):
     width = width
     height = int(width * 0.75)
     running = True
-
-    pygame.init()
-    screen = pygame.display.set_mode((width, height))
 
     while running:
         pygame.time.wait(30)
