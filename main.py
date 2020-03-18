@@ -33,10 +33,6 @@ while running:
     if s == -1:
         s = start(screen, 1000, s)
         print(s)
-    if s == -100:
-        running = False
-        print(s)
-        break
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -49,7 +45,7 @@ while running:
     player_rect, yChange, ignore = move_player(player_rect, yChange, ignore, tile_rects, player_movement)
 
     screen.blit(player_img, (player_rect.x - scroll_int[0], player_rect.y - scroll_int[1]))
-    pygame.display.update()
+    pygame.display.flip()
 
     clock.tick(60)
 
