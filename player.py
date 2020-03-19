@@ -50,7 +50,8 @@ def move_player(player_rect, yChange, ignore, tiles, movement):
             movement[2] = False
         if yChange < 0:
             player_rect.top = tile.bottom
-            yChange = 5
+            yChange = 0
+            ignore = True
 
 
     return player_rect, yChange, ignore
