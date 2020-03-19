@@ -32,24 +32,24 @@ def move_player(player_rect, yChange, ignore, tiles, movement):
 
     player_rect.x += xChange
     collision_list = collision_test(player_rect,tiles)
-    print(collision_list)
+    # print(collision_list)
     cl_count = 0
     for tile in collision_list:
         if xChange > 0:
-            player_rect.right = tile[0].left
+            player_rect.right = tile.left
         if xChange < 0:
-            player_rect.left = tile[0].right
+            player_rect.left = tile.right
     player_rect.y += yChange
     collision_list = collision_test(player_rect,tiles)
-    print(collision_list)
+    # print(collision_list)
     for tile in collision_list:
         if yChange > 0:
-            player_rect.bottom = tile[0].top
+            player_rect.bottom = tile.top
             yChange = 0
             ignore = False
             movement[2] = False
         if yChange < 0:
-            player_rect.top = tile[0].bottom
+            player_rect.top = tile.bottom
             yChange = 5
 
 

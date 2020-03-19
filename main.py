@@ -13,6 +13,12 @@ screen = pygame.display.set_mode((width, height))
 player_img = pygame.image.load('potato.png').convert()
 player_img = pygame.transform.scale(player_img, (40, 40))
 
+textures = [texture for texture in range(len(os.listdir('textures')) + 1)]
+for texture in range(1, len(os.listdir('textures')) + 1):
+    image = pygame.image.load('textures/' + str(texture) + '.png').convert_alpha()
+    image = pygame.transform.scale(image, (75, 75))
+    textures[texture] = image
+
 clock = pygame.time.Clock()
 
 levels = []
@@ -41,7 +47,7 @@ while running:
 
     screen.fill((51, 153, 255))
 
-    scroll, scroll_int, tile_rects = move_background(screen, scroll, levels[s], player_rect, tiles)
+    scroll, scroll_int, tile_rects = move_background(screen, scroll, levels[s], player_rect, tiles, textures)
     player_rect, yChange, ignore = move_player(player_rect, yChange, ignore, tile_rects, player_movement)
 
     screen.blit(player_img, (player_rect.x - scroll_int[0], player_rect.y - scroll_int[1]))
