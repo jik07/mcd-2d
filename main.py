@@ -1,6 +1,7 @@
 import os
 import pygame
 from start import start
+from end import end
 from background import move_background
 from player import move_player
 import pprint
@@ -39,6 +40,8 @@ while running:
     if s == -1:
         s = start(screen, 1000, s)
         print(s)
+    elif s == -2:
+        s = end(screen, 1000, s)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -47,8 +50,11 @@ while running:
 
     screen.fill((51, 153, 255))
 
-    scroll, scroll_int, tile_rects = move_background(screen, scroll, levels[s], player_rect, tiles, textures)
+    scroll, scroll_int, tile_rects, player_rect = move_background(screen, scroll, levels[s], player_rect, tiles, textures)
     player_rect, yChange, ignore, s = move_player(player_rect, yChange, ignore, tile_rects, player_movement, s)
+
+    if s >= len(levels):
+        s = -2
 
     screen.blit(player_img, (player_rect.x - scroll_int[0], player_rect.y - scroll_int[1]))
     pygame.display.flip()
