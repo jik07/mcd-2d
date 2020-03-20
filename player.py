@@ -1,5 +1,6 @@
 import pygame
 from gui_elements import collision_test
+import blocks
 
 def move_player(player_rect, yChange, ignore, tiles, movement):
 
@@ -18,8 +19,8 @@ def move_player(player_rect, yChange, ignore, tiles, movement):
     yChange += 0.5
     if yChange == 0:
         ignore = True
-    if yChange > 10:
-        yChange = 10
+    if yChange > 18:
+        yChange = 18
 
     if movement[0]:
         xChange = 5
@@ -29,29 +30,19 @@ def move_player(player_rect, yChange, ignore, tiles, movement):
         xChange *= 1.5
 
 
-
+    # Test horizontal collisions
     player_rect.x += xChange
     collision_list = collision_test(player_rect,tiles)
-    # print(collision_list)
-    cl_count = 0
     for tile in collision_list:
-        if xChange > 0:
-            player_rect.right = tile.left
-        if xChange < 0:
-            player_rect.left = tile.right
+        if tile[1] == 1 or tile[1] == 2: #grass or dirt
+            xChange, yChange, player_rect, tile, ignore = blocks.dirt_grass(True, xChange, yChange, player_rect, tile, movement, ignore)
+
+    # Test vertical collisions
     player_rect.y += yChange
     collision_list = collision_test(player_rect,tiles)
-    # print(collision_list)
     for tile in collision_list:
-        if yChange > 0:
-            player_rect.bottom = tile.top
-            yChange = 0
-            ignore = False
-            movement[2] = False
-        if yChange < 0:
-            player_rect.top = tile.bottom
-            yChange = 0
-            ignore = True
+        if tile[1] == 1 or tile[1] == 2: #grass or dirt
+            xChange, yChange, player_rect, tile, ignore = blocks.dirt_grass(False, xChange, yChange, player_rect, tile, movement, ignore)
 
 
     return player_rect, yChange, ignore
