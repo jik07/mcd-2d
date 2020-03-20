@@ -1,7 +1,8 @@
 import pygame
 import gui_elements
+from start import start
 
-def start(screen, width, screenvar):
+def end(screen, width, screenvar):
     width = width
     height = int(width * 0.75)
     running = True
@@ -15,11 +16,11 @@ def start(screen, width, screenvar):
         pygame.time.wait(30)
         backgroundColor = (200, 0, 255)
         screen.fill(backgroundColor)
-        gui_elements.text("Dungeon Adventure", (102, 0, 204), 72, 0, 200, True)
+        gui_elements.text("Yeyyyyy!!", (102, 0, 204), 72, 0, 200, True)
+        gui_elements.text("You Won!!!!", (102, 0, 204), 72, 0, 300, True)
 
-        if not gui_elements.button("Start!", 500, 500, 400, 60, (204, 0 , 204), (255, 51, 255), (153, 0, 153), (102, 0, 204), 72):
-            screenvar = 0
-            print(f"screenvar: {screenvar}")
+        if not gui_elements.button("Play Again", 500, 500, 600, 60, (204, 0 , 204), (255, 51, 255), (153, 0, 153), (102, 0, 204), 72):
+            screenvar = start(screen, width, screenvar)
             return screenvar
             break
 

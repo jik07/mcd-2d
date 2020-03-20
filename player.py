@@ -2,11 +2,13 @@ import pygame
 from gui_elements import collision_test
 import blocks
 
-def move_player(player_rect, yChange, ignore, tiles, movement):
+def move_player(player_rect, yChange, ignore, tiles, movement, s):
 
     xChange = 0
     movement[0] = False
     movement[1] = False
+    if yChange != 0:
+        movement[2] = True
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RIGHT]:
         movement[0] = True
@@ -36,6 +38,8 @@ def move_player(player_rect, yChange, ignore, tiles, movement):
     for tile in collision_list:
         if tile[1] == 1 or tile[1] == 2: #grass or dirt
             xChange, yChange, player_rect, tile, ignore = blocks.dirt_grass(True, xChange, yChange, player_rect, tile, movement, ignore)
+        if tile[1] == 3:
+            player_rect, s = blocks.portal(player_rect, s)
 
     # Test vertical collisions
     player_rect.y += yChange
@@ -43,6 +47,7 @@ def move_player(player_rect, yChange, ignore, tiles, movement):
     for tile in collision_list:
         if tile[1] == 1 or tile[1] == 2: #grass or dirt
             xChange, yChange, player_rect, tile, ignore = blocks.dirt_grass(False, xChange, yChange, player_rect, tile, movement, ignore)
+        if tile[1] == 3:
+            player_rect, s = blocks.portal(player_rect, s)
 
-
-    return player_rect, yChange, ignore
+    return player_rect, yChange, ignore, s
