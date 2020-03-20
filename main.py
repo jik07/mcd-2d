@@ -11,7 +11,7 @@ height = int(width * 0.75)
 
 pygame.init()
 screen = pygame.display.set_mode((width, height))
-player_img = pygame.image.load('potato.png').convert()
+player_img = pygame.image.load('potato.png').convert_alpha()
 player_img = pygame.transform.scale(player_img, (40, 40))
 
 textures = [texture for texture in range(len(os.listdir('textures')) + 1)]
@@ -37,11 +37,10 @@ player_rect = pygame.Rect(500, 300, 40, 40)
 player_movement = [False, False, False]
 running = True
 while running:
+    if s == -2:
+        s = end(screen, 1000, s)
     if s == -1:
         s = start(screen, 1000, s)
-        print(s)
-    elif s == -2:
-        s = end(screen, 1000, s)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

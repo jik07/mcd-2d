@@ -1,5 +1,6 @@
 import pygame
 import gui_elements
+from start import start
 
 def end(screen, width, screenvar):
     width = width
@@ -19,7 +20,7 @@ def end(screen, width, screenvar):
         gui_elements.text("You Won!!!!", (102, 0, 204), 72, 0, 300, True)
 
         if not gui_elements.button("Play Again", 500, 500, 600, 60, (204, 0 , 204), (255, 51, 255), (153, 0, 153), (102, 0, 204), 72):
-            screenvar = -1
+            screenvar = start(screen, width, screenvar)
             return screenvar
             break
 

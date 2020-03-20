@@ -7,7 +7,7 @@ def move_player(player_rect, yChange, ignore, tiles, movement, s):
     xChange = 0
     movement[0] = False
     movement[1] = False
-    if yChange > 0:
+    if yChange != 0:
         movement[2] = True
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RIGHT]:
