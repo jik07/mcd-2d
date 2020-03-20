@@ -35,14 +35,14 @@ def move_player(player_rect, yChange, ignore, tiles, movement):
     collision_list = collision_test(player_rect,tiles)
     for tile in collision_list:
         if tile[1] == 1 or tile[1] == 2: #grass or dirt
-            blocks.dirt_grassH(xChange, player_rect, tile)
+            xChange, yChange, player_rect, tile, ignore = blocks.dirt_grass(True, xChange, yChange, player_rect, tile, movement, ignore)
 
     # Test vertical collisions
     player_rect.y += yChange
     collision_list = collision_test(player_rect,tiles)
     for tile in collision_list:
         if tile[1] == 1 or tile[1] == 2: #grass or dirt
-            blocks.dirt_grassV(yChange, player_rect, tile, ignore, movement)
+            xChange, yChange, player_rect, tile, ignore = blocks.dirt_grass(False, xChange, yChange, player_rect, tile, movement, ignore)
 
 
     return player_rect, yChange, ignore
