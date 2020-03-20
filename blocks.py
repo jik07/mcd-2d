@@ -16,3 +16,10 @@ def dirt_grass(horizontal, xChange, yChange, player_rect, tile, movement, ignore
             ignore = True
 
     return xChange, yChange, player_rect, movement, ignore
+
+
+def portal(player_rect, s):
+    player_rect.x = 500
+    player_rect.y = 300
+    s += 1
+    return player_rect, s
