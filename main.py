@@ -47,7 +47,7 @@ while running:
 
     screen.fill((51, 153, 255))
 
-    scroll, scroll_int, tile_rects = move_background(screen, scroll, levels[s], player_rect, tiles, textures)
+    scroll, scroll_int, tile_rects, player_rect = move_background(screen, scroll, levels[s], player_rect, tiles, textures)
     player_rect, yChange, ignore, s = move_player(player_rect, yChange, ignore, tile_rects, player_movement, s)
 
     screen.blit(player_img, (player_rect.x - scroll_int[0], player_rect.y - scroll_int[1]))
