@@ -18,8 +18,8 @@ def move_player(player_rect, yChange, ignore, tiles, movement):
     yChange += 0.5
     if yChange == 0:
         ignore = True
-    if yChange > 10:
-        yChange = 10
+    if yChange > 18:
+        yChange = 18
 
     if movement[0]:
         xChange = 5
