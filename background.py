@@ -1,4 +1,5 @@
 import pygame
+import pprint
 from gui_elements import collision_test
 
 def move_background(screen, scroll, level, player_rect, tiles, textures):
@@ -11,7 +12,7 @@ def move_background(screen, scroll, level, player_rect, tiles, textures):
 
 
     height = 75
-    tile_rects = []
+    tile_rects = [[] for counter in range(len(tiles))]
     y = 0
     # print("============START=============")
     for row in level:
@@ -20,8 +21,7 @@ def move_background(screen, scroll, level, player_rect, tiles, textures):
             # print(tile)
             if tile != 0:
                 screen.blit(textures[tile], (x * height - scroll_int[0], y * height - scroll_int[1]))
-                tile_rects.append(pygame.Rect(x * height, y * height, height, height))
+            tile_rects[y].append([pygame.Rect(x * height, y * height, height, height), tile])
             x += 1
         y += 1
-
     return scroll, scroll_int, tile_rects
