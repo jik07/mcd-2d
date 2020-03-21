@@ -17,7 +17,7 @@ def end(screen, width, screenvar):
             break
 
         pygame.display.update()
-
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 screenvar = -100

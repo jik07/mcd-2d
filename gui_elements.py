@@ -22,12 +22,11 @@ def button(t, x, y, w, h, ic, ac, cc, tc, ts):
     click = pygame.mouse.get_pressed()[0]
     if x - w/2 < mouseX < x + w/2 and y < mouseY < y + h:
         pygame.draw.rect(screen, ac, (x - w/2, y, w, h))
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONUP:
+                ret = False
     else:
         pygame.draw.rect(screen, ic, (x - w/2, y, w, h))
-
-    for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONUP:
-            ret = False
 
     text(t, tc, ts, x, y, False, True, h)
     return ret
