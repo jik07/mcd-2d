@@ -41,6 +41,8 @@ while running:
         s = end(screen, 1000, s)
     if s == -1:
         s = start(screen, 1000, s)
+    if s == -100:
+        break
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

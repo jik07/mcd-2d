@@ -20,18 +20,17 @@ def button(t, x, y, w, h, ic, ac, cc, tc, ts):
     ret = True
     mouseX, mouseY = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()[0]
-    for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONUP:
-            if x - w/2 < mouseX < x + w/2 and y < mouseY < y + h:
-                pygame.draw.rect(screen, ac, (x - w/2, y, w, h))
-                if click:
-                    pygame.draw.rect(screen, cc, (x - w/2, y, w, h))
-                    ret = False
-
+    if x - w/2 < mouseX < x + w/2 and y < mouseY < y + h:
+        pygame.draw.rect(screen, ac, (x - w/2, y, w, h))
     else:
         pygame.draw.rect(screen, ic, (x - w/2, y, w, h))
+
+    for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONUP:
+            ret = False
+
     text(t, tc, ts, x, y, False, True, h)
-    return(ret)
+    return ret
 
 def collision_test(player, tiles):
     touching = []
