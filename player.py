@@ -40,6 +40,8 @@ def move_player(player_rect, yChange, ignore, tiles, movement, s):
             xChange, yChange, player_rect, tile, ignore = blocks.dirt_grass(True, xChange, yChange, player_rect, tile, movement, ignore)
         if tile[1] == 3:
             player_rect, s = blocks.portal(player_rect, s)
+        if tile[1] == 4:
+            player_rect = blocks.lava(player_rect)
 
     # Test vertical collisions
     player_rect.y += yChange
@@ -49,5 +51,7 @@ def move_player(player_rect, yChange, ignore, tiles, movement, s):
             xChange, yChange, player_rect, tile, ignore = blocks.dirt_grass(False, xChange, yChange, player_rect, tile, movement, ignore)
         if tile[1] == 3:
             player_rect, s = blocks.portal(player_rect, s)
+        if tile[1] == 4:
+            player_rect = blocks.lava(player_rect)
 
     return player_rect, yChange, ignore, s
