@@ -41,10 +41,10 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s):
             xChange -= 0.5
         if xChange < 0:
             xChange += 0.5
-        if xChange > 8:
+        if xChange > 7.5:
             xChange = 8
         if xChange < -8:
-            xChange = -8
+            xChange = -7.5
 
 
 
@@ -56,8 +56,9 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s):
             xChange, yChange, player_rect, tile, ignore = blocks.dirt_grass(True, xChange, yChange, player_rect, tile, movement, ignore)
         if tile[1] == 3:
             player_rect, s = blocks.portal(player_rect, s)
-        if tile[1] == 4:
+        if tile[1] == 4 or tile[1] == 5:
             player_rect = blocks.lava(player_rect)
+
 
     # Test vertical collisions
     player_rect.y += yChange
@@ -67,7 +68,7 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s):
             xChange, yChange, player_rect, tile, ignore = blocks.dirt_grass(False, xChange, yChange, player_rect, tile, movement, ignore)
         if tile[1] == 3:
             player_rect, s = blocks.portal(player_rect, s)
-        if tile[1] == 4:
+        if tile[1] == 4 or tile[1] == 5:
             player_rect = blocks.lava(player_rect)
 
     return player_rect, yChange, xChange, ignore, s

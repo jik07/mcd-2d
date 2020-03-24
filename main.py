@@ -18,6 +18,8 @@ textures = [texture for texture in range(len(os.listdir('textures')) + 1)]
 for texture in range(1, len(os.listdir('textures')) + 1):
     image = pygame.image.load('textures/' + str(texture) + '.png').convert_alpha()
     image = pygame.transform.scale(image, (75, 75))
+    if texture == 5:
+        image = pygame.transform.scale(image, (75, 50))
     textures[texture] = image
 
 clock = pygame.time.Clock()
