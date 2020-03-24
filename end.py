@@ -1,28 +1,28 @@
 import pygame
 import gui_elements
-from start import start
 
 def end(screen, width, screenvar):
     width = width
     height = int(width * 0.75)
     running = True
+    clicked = False
 
     while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-                break
-
-        pygame.time.wait(30)
         backgroundColor = (200, 0, 255)
         screen.fill(backgroundColor)
         gui_elements.text("Yeyyyyy!!", (102, 0, 204), 72, 0, 200, True)
         gui_elements.text("You Won!!!!", (102, 0, 204), 72, 0, 300, True)
 
-        if not gui_elements.button("Play Again", 500, 500, 600, 60, (204, 0 , 204), (255, 51, 255), (153, 0, 153), (102, 0, 204), 72):
-            screenvar = start(screen, width, screenvar)
+        ret, clicked = gui_elements.button("Play Again", 500, 500, 600, 60, (204, 0 , 204), (255, 51, 255), (153, 0, 153), (102, 0, 204), 72, clicked)
+        if not ret:
+            screenvar = -1
             return screenvar
             break
 
-
         pygame.display.update()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                screenvar = -100
+                return screenvar
+                break

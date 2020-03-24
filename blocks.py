@@ -23,3 +23,8 @@ def portal(player_rect, s):
     player_rect.y = 300
     s += 1
     return player_rect, s
+
+def lava(player_rect):
+    player_rect.x = 500
+    player_rect.y = 300
+    return player_rect
