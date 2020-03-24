@@ -31,6 +31,7 @@ pprint.pprint(tiles)
 
 scroll = [0, 0]
 yChange = 0
+xChange = 0
 ignore = False
 s = -1
 player_rect = pygame.Rect(500, 300, 40, 40)
@@ -52,7 +53,7 @@ while running:
     screen.fill((51, 153, 255))
 
     scroll, scroll_int, tile_rects, player_rect = move_background(screen, scroll, levels[s], player_rect, tiles, textures)
-    player_rect, yChange, ignore, s = move_player(player_rect, yChange, ignore, tile_rects, player_movement, s)
+    player_rect, yChange, xChange, ignore, s = move_player(player_rect, yChange, xChange, ignore, tile_rects, player_movement, s)
 
     if s >= len(levels):
         s = -2
