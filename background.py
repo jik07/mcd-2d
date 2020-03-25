@@ -11,7 +11,7 @@ def move_background(screen, scroll, level, player_rect, tiles, textures):
     scroll_int[1] = int(scroll[1])
 
 
-    height = 75
+    height = 40
     tile_rects = [[] for counter in range(len(tiles))]
     y = 0
     # print("============START=============")
@@ -21,7 +21,7 @@ def move_background(screen, scroll, level, player_rect, tiles, textures):
             # print(tile)
             if tile == 5:
                 screen.blit(textures[tile], (x * height - scroll_int[0], y * height - scroll_int[1] + 25))
-                tile_rects[y].append([pygame.Rect(x * height, y * height + 25, height, 50), tile])
+                tile_rects[y].append([pygame.Rect(x * height, y * height + 25, height, 30), tile])
             else:
                 if tile != 0:
                     screen.blit(textures[tile], (x * height - scroll_int[0], y * height - scroll_int[1]))

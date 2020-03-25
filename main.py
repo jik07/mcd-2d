@@ -17,9 +17,9 @@ player_img = pygame.transform.scale(player_img, (40, 40))
 textures = [texture for texture in range(len(os.listdir('textures')) + 1)]
 for texture in range(1, len(os.listdir('textures')) + 1):
     image = pygame.image.load('textures/' + str(texture) + '.png').convert_alpha()
-    image = pygame.transform.scale(image, (75, 75))
+    image = pygame.transform.scale(image, (40, 40))
     if texture == 5:
-        image = pygame.transform.scale(image, (75, 50))
+        image = pygame.transform.scale(image, (40, 30))
     textures[texture] = image
 
 clock = pygame.time.Clock()
@@ -29,7 +29,7 @@ for level in range(len(os.listdir('levels'))):
     with open('levels/lvl' + str(level) + '.txt', 'r') as f:
         tiles = [[int(tile) for tile in row.split()] for row in f.readlines()]
         levels.append(tiles)
-pprint.pprint(tiles)
+# pprint.pprint(tiles)
 
 scroll = [0, 0]
 yChange = 0

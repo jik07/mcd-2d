@@ -2,6 +2,7 @@ import pygame
 import gui_elements
 
 def start(screen, width, screenvar):
+    print("new")
     width = width
     height = int(width * 0.75)
     running = True
