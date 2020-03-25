@@ -2,8 +2,9 @@ import pygame
 from gui_elements import collision_test
 import blocks
 
-def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s):
-
+def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn, new_level):
+    if new_level:
+        player_rect.x, player_rect.y = spawn[0], spawn[1]
 
     keys = pygame.key.get_pressed()
     movement[0] = False
@@ -50,7 +51,7 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s):
         if xChange < -8:
             xChange = -7.5
 
-
+    new_level = False
 
     # Test horizontal collisions
     player_rect.x += xChange
@@ -59,9 +60,9 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s):
         if tile[1] == 1 or tile[1] == 2: #grass or dirt
             xChange, yChange, player_rect, tile, ignore = blocks.dirt_grass(True, xChange, yChange, player_rect, tile, movement, ignore)
         if tile[1] == 3:
-            player_rect, s = blocks.portal(player_rect, s)
+            s, new_level = blocks.portal(s, new_level)
         if tile[1] == 4 or tile[1] == 5:
-            player_rect = blocks.lava(player_rect)
+            player_rect = blocks.lava(player_rect, spawn)
 
 
     # Test vertical collisions
@@ -70,12 +71,14 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s):
     for tile in collision_list:
         if tile[1] == 1 or tile[1] == 2: #grass or dirt
             xChange, yChange, player_rect, tile, ignore = blocks.dirt_grass(False, xChange, yChange, player_rect, tile, movement, ignore)
-        if tile[1] == 3:
-            player_rect, s = blocks.portal(player_rect, s)
         if tile[1] == 4 or tile[1] == 5:
-            player_rect = blocks.lava(player_rect)
+            player_rect = blocks.lava(player_rect, spawn)
 
+<<<<<<< HEAD
     if player_rect.y > 700:
         player_rect.x, player_rect.y = 500, 300
 
     return player_rect, yChange, xChange, ignore, s
+=======
+    return player_rect, yChange, xChange, ignore, s, new_level
+>>>>>>> adad91480226f44f3da6cda5b43c89bfc3a180da
