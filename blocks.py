@@ -18,13 +18,12 @@ def dirt_grass(horizontal, xChange, yChange, player_rect, tile, movement, ignore
     return xChange, yChange, player_rect, movement, ignore
 
 
-def portal(player_rect, s):
-    player_rect.x = 500
-    player_rect.y = 300
+def portal(s, new_level):
     s += 1
-    return player_rect, s
+    new_level = True
+    return s, new_level
 
-def lava(player_rect):
-    player_rect.x = 500
-    player_rect.y = 300
+def lava(player_rect, spawn):
+    player_rect.x = spawn[0]
+    player_rect.y = spawn[1]
     return player_rect

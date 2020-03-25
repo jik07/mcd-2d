@@ -29,16 +29,18 @@ for level in range(len(os.listdir('levels'))):
     with open('levels/lvl' + str(level) + '.txt', 'r') as f:
         tiles = [[int(tile) for tile in row.split()] for row in f.readlines()]
         levels.append(tiles)
-# pprint.pprint(tiles)
+# pprint.pprint(tiles)'
 
 scroll = [0, 0]
 yChange = 0
 xChange = 0
 ignore = False
 s = -1
-player_rect = pygame.Rect(500, 300, 40, 40)
+player_rect = pygame.Rect(0, 0, 40, 40)
 player_movement = [False, False, False]
 running = True
+spawn = [0, 0]
+new_level = True
 while running:
     if s == -2:
         s = end(screen, 1000, s)
@@ -54,8 +56,8 @@ while running:
 
     screen.fill((51, 153, 255))
 
-    scroll, scroll_int, tile_rects, player_rect = move_background(screen, scroll, levels[s], player_rect, tiles, textures)
-    player_rect, yChange, xChange, ignore, s = move_player(player_rect, yChange, xChange, ignore, tile_rects, player_movement, s)
+    scroll, scroll_int, tile_rects, player_rect, spawn = move_background(screen, scroll, levels[s], player_rect, tiles, textures, spawn)
+    player_rect, yChange, xChange, ignore, s, new_level = move_player(player_rect, yChange, xChange, ignore, tile_rects, player_movement, s, spawn, new_level)
 
     if s >= len(levels):
         s = -2
