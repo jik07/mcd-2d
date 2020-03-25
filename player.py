@@ -26,11 +26,15 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s):
         yChange = 18
 
     if movement[2] == False:
+
         xChange = 0
-        if movement[0]:
-            xChange = 5
-        if movement[1]:
-            xChange = -5
+        if movement[0] and movement[1]:
+            xChange = 0
+        else:
+            if movement[0]:
+                xChange = 5
+            if movement[1]:
+                xChange = -5
 
     else:
         if movement[0]:
@@ -70,5 +74,8 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s):
             player_rect, s = blocks.portal(player_rect, s)
         if tile[1] == 4 or tile[1] == 5:
             player_rect = blocks.lava(player_rect)
+
+    if player_rect.y > 700:
+        player_rect.x, player_rect.y = 500, 300
 
     return player_rect, yChange, xChange, ignore, s

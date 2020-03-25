@@ -19,12 +19,12 @@ def dirt_grass(horizontal, xChange, yChange, player_rect, tile, movement, ignore
 
 
 def portal(player_rect, s):
-    player_rect.x = 500
-    player_rect.y = 300
+    player_rect.x = 400
+    player_rect.y = 0
     s += 1
     return player_rect, s
 
 def lava(player_rect):
-    player_rect.x = 500
-    player_rect.y = 300
+    player_rect.x = 400
+    player_rect.y = 0
     return player_rect

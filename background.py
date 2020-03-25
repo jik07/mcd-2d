@@ -28,6 +28,5 @@ def move_background(screen, scroll, level, player_rect, tiles, textures):
                 tile_rects[y].append([pygame.Rect(x * height, y * height, height, height), tile])
             x += 1
         y += 1
-    if player_rect.y > 700:
-        player_rect.x, player_rect.y = 500, 300
+
     return scroll, scroll_int, tile_rects, player_rect

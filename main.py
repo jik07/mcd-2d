@@ -36,7 +36,7 @@ yChange = 0
 xChange = 0
 ignore = False
 s = -1
-player_rect = pygame.Rect(500, 300, 40, 40)
+player_rect = pygame.Rect(400, 0, 40, 40)
 player_movement = [False, False, False]
 running = True
 while running:
