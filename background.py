@@ -20,10 +20,9 @@ def move_background(screen, scroll, level, player_rect, tiles, textures, spawn):
         for tile in row:
             # print(tile)
             if tile == 5:
-                print("y")
-                screen.blit(textures[tile], (x * height - scroll_int[0], y * height - scroll_int[1] + 25))
+                screen.blit(textures[tile], (x * height - scroll_int[0], y * height - scroll_int[1] + 10))
                 tile_rects[y].append([pygame.Rect(x * height, y * height + 25, height, 30), tile])
-            if tile == 6:
+            elif tile == 6:
                 spawn[0] = x * height
                 spawn[1] = y * height
                 screen.blit(textures[tile], (x * height - scroll_int[0], y * height - scroll_int[1]))
@@ -34,11 +33,5 @@ def move_background(screen, scroll, level, player_rect, tiles, textures, spawn):
                 tile_rects[y].append([pygame.Rect(x * height, y * height, height, height), tile])
             x += 1
         y += 1
-<<<<<<< HEAD
 
-    return scroll, scroll_int, tile_rects, player_rect
-=======
-    if player_rect.y > 700:
-        player_rect.x, player_rect.y = spawn[0], spawn[1]
     return scroll, scroll_int, tile_rects, player_rect, spawn
->>>>>>> adad91480226f44f3da6cda5b43c89bfc3a180da

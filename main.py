@@ -36,11 +36,7 @@ yChange = 0
 xChange = 0
 ignore = False
 s = -1
-<<<<<<< HEAD
-player_rect = pygame.Rect(400, 0, 40, 40)
-=======
 player_rect = pygame.Rect(0, 0, 40, 40)
->>>>>>> adad91480226f44f3da6cda5b43c89bfc3a180da
 player_movement = [False, False, False]
 running = True
 spawn = [0, 0]

@@ -60,7 +60,7 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn
         if tile[1] == 1 or tile[1] == 2: #grass or dirt
             xChange, yChange, player_rect, tile, ignore = blocks.dirt_grass(True, xChange, yChange, player_rect, tile, movement, ignore)
         if tile[1] == 3:
-            s, new_level = blocks.portal(s, new_level)
+            player_rect, s, new_level = blocks.portal(player_rect, s, new_level)
         if tile[1] == 4 or tile[1] == 5:
             player_rect = blocks.lava(player_rect, spawn)
 
@@ -71,14 +71,12 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn
     for tile in collision_list:
         if tile[1] == 1 or tile[1] == 2: #grass or dirt
             xChange, yChange, player_rect, tile, ignore = blocks.dirt_grass(False, xChange, yChange, player_rect, tile, movement, ignore)
+        if tile[1] == 3:
+            player_rect, s, new_level, yChange, xChange, ignore = blocks.portal(player_rect, s, new_level, yChange, xChange, ignore)
         if tile[1] == 4 or tile[1] == 5:
-            player_rect = blocks.lava(player_rect, spawn)
+            player_rect, yChange, xChange, ignore = blocks.lava(player_rect, spawn, yChange, xChange, ignore)
 
-<<<<<<< HEAD
     if player_rect.y > 700:
-        player_rect.x, player_rect.y = 500, 300
+        player_rect.x, player_rect.y = spawn[0], spawn[1]
 
-    return player_rect, yChange, xChange, ignore, s
-=======
     return player_rect, yChange, xChange, ignore, s, new_level
->>>>>>> adad91480226f44f3da6cda5b43c89bfc3a180da
