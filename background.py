@@ -2,7 +2,7 @@ import pygame
 import pprint
 from gui_elements import collision_test
 
-def move_background(screen, scroll, level, player_rect, tiles, textures, spawn):
+def move_background(screen, scroll, level, player_rect, tiles, textures, spawn, d_open):
 
     scroll[0] += (player_rect.x-scroll[0] - 480)/20
     scroll[1] += (player_rect.y-scroll[1] - 355)/20
@@ -14,6 +14,7 @@ def move_background(screen, scroll, level, player_rect, tiles, textures, spawn):
     height = 40
     tile_rects = [[] for counter in range(len(tiles))]
     y = 0
+    d_open = False
     # print("============START=============")
     for row in level:
         x = 0
@@ -27,6 +28,15 @@ def move_background(screen, scroll, level, player_rect, tiles, textures, spawn):
                 spawn[1] = y * height
                 screen.blit(textures[tile], (x * height - scroll_int[0], y * height - scroll_int[1]))
                 tile_rects[y].append([pygame.Rect(x * height, y * height, height, height), tile])
+            elif tile == 7:
+                rect = pygame.Rect(x * height, y * height, height*2, height*2)
+                if player_rect.colliderect(rect) and player_rect.left > rect.left and player_rect.right < rect.right:
+                    tex = 8
+                    d_open = True
+                else:
+                    tex = 7
+                screen.blit(textures[tex], (x * height - scroll_int[0], y * height - scroll_int[1]))
+                tile_rects[y].append([rect, tile])
             else:
                 if tile != 0:
                     screen.blit(textures[tile], (x * height - scroll_int[0], y * height - scroll_int[1]))
@@ -34,4 +44,4 @@ def move_background(screen, scroll, level, player_rect, tiles, textures, spawn):
             x += 1
         y += 1
 
-    return scroll, scroll_int, tile_rects, player_rect, spawn
+    return scroll, scroll_int, tile_rects, player_rect, spawn, d_open

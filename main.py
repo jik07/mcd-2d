@@ -20,6 +20,8 @@ for texture in range(1, len(os.listdir('textures')) + 1):
     image = pygame.transform.scale(image, (40, 40))
     if texture == 5:
         image = pygame.transform.scale(image, (40, 30))
+    if texture == 7 or texture == 8:
+        image = pygame.transform.scale(image, (80, 80))
     textures[texture] = image
 
 clock = pygame.time.Clock()
@@ -41,6 +43,7 @@ player_movement = [False, False, False]
 running = True
 spawn = [0, 0]
 new_level = True
+d_open = False
 while running:
     if s == -2:
         s = end(screen, 1000, s)
@@ -56,8 +59,8 @@ while running:
 
     screen.fill((51, 153, 255))
 
-    scroll, scroll_int, tile_rects, player_rect, spawn = move_background(screen, scroll, levels[s], player_rect, tiles, textures, spawn)
-    player_rect, yChange, xChange, ignore, s, new_level = move_player(player_rect, yChange, xChange, ignore, tile_rects, player_movement, s, spawn, new_level)
+    scroll, scroll_int, tile_rects, player_rect, spawn, d_open = move_background(screen, scroll, levels[s], player_rect, tiles, textures, spawn, d_open)
+    player_rect, yChange, xChange, ignore, s, new_level = move_player(player_rect, yChange, xChange, ignore, tile_rects, player_movement, s, spawn, new_level, d_open)
 
     if s >= len(levels):
         s = -2

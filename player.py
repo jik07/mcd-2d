@@ -2,9 +2,10 @@ import pygame
 from gui_elements import collision_test
 import blocks
 
-def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn, new_level):
+def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn, new_level, d_open):
     if new_level:
         player_rect.x, player_rect.y = spawn[0], spawn[1]
+    new_level = False
 
     keys = pygame.key.get_pressed()
     movement[0] = False
@@ -20,6 +21,12 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn
         yChange = -10
         movement[2] = True
 
+    if keys[pygame.K_DOWN] and movement[2] == False and d_open:
+        s += 1
+        new_level = True
+        player_rect.x = -1000
+        player_rect.y = -1000
+        print("hi")
     yChange += 0.5
     if yChange == 0:
         ignore = True
@@ -27,7 +34,6 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn
         yChange = 18
 
     if movement[2] == False:
-
         xChange = 0
         if movement[0] and movement[1]:
             xChange = 0
@@ -51,7 +57,6 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn
         if xChange < -8:
             xChange = -7.5
 
-    new_level = False
 
     # Test horizontal collisions
     player_rect.x += xChange
@@ -60,7 +65,7 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn
         if tile[1] == 1 or tile[1] == 2: #grass or dirt
             xChange, yChange, player_rect, tile, ignore = blocks.dirt_grass(True, xChange, yChange, player_rect, tile, movement, ignore)
         if tile[1] == 3:
-            player_rect, s, new_level = blocks.portal(player_rect, s, new_level)
+            player_rect, s, new_level, yChange, xChange, ignore = blocks.portal(player_rect, s, new_level, yChange, xChange, ignore)
         if tile[1] == 4 or tile[1] == 5:
             player_rect = blocks.lava(player_rect, spawn)
 
