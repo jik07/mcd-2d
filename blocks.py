@@ -19,7 +19,8 @@ def dirt_grass(horizontal, xChange, yChange, player_rect, tile, movement, ignore
 
 
 def portal(player_rect, s, new_level, yChange, xChange, ignore):
-    s += 1
+    s[0] += 1
+    s[1] = 0
     new_level = True
     player_rect.x = -200
     player_rect.y = -200

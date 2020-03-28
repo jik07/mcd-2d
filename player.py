@@ -2,7 +2,7 @@ import pygame
 from gui_elements import collision_test
 import blocks
 
-def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn, new_level, d_open):
+def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn, new_level, d):
     if new_level:
         player_rect.x, player_rect.y = spawn[0], spawn[1]
     new_level = False
@@ -21,12 +21,14 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn
         yChange = -10
         movement[2] = True
 
-    if keys[pygame.K_DOWN] and movement[2] == False and d_open:
-        s += 1
+    if keys[pygame.K_DOWN] and movement[2] == False and d != "False":
+        if s[1] == 0:
+            s[1] = d + 1
+        else:
+            s[1] = d
         new_level = True
-        player_rect.x = -1000
-        player_rect.y = -1000
-        print("hi")
+        player_rect.x = -100
+        player_rect.y = -100
     yChange += 0.5
     if yChange == 0:
         ignore = True
@@ -67,7 +69,7 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn
         if tile[1] == 3:
             player_rect, s, new_level, yChange, xChange, ignore = blocks.portal(player_rect, s, new_level, yChange, xChange, ignore)
         if tile[1] == 4 or tile[1] == 5:
-            player_rect = blocks.lava(player_rect, spawn)
+            player_rect, yChange, xChange, ignore = blocks.lava(player_rect, spawn, yChange, xChange, ignore)
 
 
     # Test vertical collisions

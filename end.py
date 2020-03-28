@@ -15,7 +15,7 @@ def end(screen, width, screenvar):
 
         ret, clicked = gui_elements.button("Play Again", 500, 500, 600, 60, (204, 0 , 204), (255, 51, 255), (153, 0, 153), (102, 0, 204), 72, clicked)
         if not ret:
-            screenvar = -1
+            screenvar[0] = -1
             return screenvar
             break
 
@@ -23,6 +23,6 @@ def end(screen, width, screenvar):
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                screenvar = -100
+                screenvar[0] = -100
                 return screenvar
                 break

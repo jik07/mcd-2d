@@ -28,28 +28,31 @@ clock = pygame.time.Clock()
 
 levels = []
 for level in range(len(os.listdir('levels'))):
-    with open('levels/lvl' + str(level) + '.txt', 'r') as f:
-        tiles = [[int(tile) for tile in row.split()] for row in f.readlines()]
-        levels.append(tiles)
+    ph = []
+    for room in range(len(os.listdir('levels/lvl' + str(level)))):
+        with open('levels/lvl' + str(level) + '/' + str(room) + '.txt', 'r') as f:
+            tiles = [[int(tile) for tile in row.split()] for row in f.readlines()]
+            ph.append(tiles)
+    levels.append(ph)
 # pprint.pprint(tiles)'
 
 scroll = [0, 0]
 yChange = 0
 xChange = 0
 ignore = False
-s = -1
+s = [-1, 0]
 player_rect = pygame.Rect(0, 0, 40, 40)
 player_movement = [False, False, False]
 running = True
 spawn = [0, 0]
 new_level = True
-d_open = False
+d = "False"
 while running:
-    if s == -2:
+    if s[0] == -2:
         s = end(screen, 1000, s)
-    if s == -1:
+    if s[0] == -1:
         s = start(screen, 1000, s)
-    if s == -100:
+    if s[0] == -100:
         break
 
     for event in pygame.event.get():
@@ -59,11 +62,11 @@ while running:
 
     screen.fill((51, 153, 255))
 
-    scroll, scroll_int, tile_rects, player_rect, spawn, d_open = move_background(screen, scroll, levels[s], player_rect, tiles, textures, spawn, d_open)
-    player_rect, yChange, xChange, ignore, s, new_level = move_player(player_rect, yChange, xChange, ignore, tile_rects, player_movement, s, spawn, new_level, d_open)
+    scroll, scroll_int, tile_rects, player_rect, spawn, d = move_background(screen, scroll, levels[s[0]][s[1]], player_rect, tiles, textures, spawn, d)
+    player_rect, yChange, xChange, ignore, s, new_level = move_player(player_rect, yChange, xChange, ignore, tile_rects, player_movement, s, spawn, new_level, d)
 
-    if s >= len(levels):
-        s = -2
+    if s[0] >= len(levels):
+        s[0] = -2
 
     screen.blit(player_img, (player_rect.x - scroll_int[0], player_rect.y - scroll_int[1]))
     pygame.display.flip()

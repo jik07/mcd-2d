@@ -14,7 +14,7 @@ def start(screen, width, screenvar):
 
         ret, clicked = gui_elements.button("Start!", 500, 500, 400, 60, (204, 0 , 204), (255, 51, 255), (153, 0, 153), (102, 0, 204), 72, clicked)
         if not ret:
-            screenvar = 0
+            screenvar[0] = 0
             return screenvar
             break
 
@@ -22,6 +22,6 @@ def start(screen, width, screenvar):
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                screenvar = -100
+                screenvar[0] = -100
                 return screenvar
                 break
