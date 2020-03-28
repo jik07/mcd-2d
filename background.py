@@ -14,7 +14,7 @@ def move_background(screen, scroll, level, player_rect, tiles, textures, spawn, 
     height = 40
     tile_rects = [[] for counter in range(len(tiles))]
     y = 0
-    d = "False"
+    d = -1
     num_d = 0
     # print("============START=============")
     for row in level:

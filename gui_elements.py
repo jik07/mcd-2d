@@ -36,9 +36,9 @@ def button(t, x, y, w, h, ic, ac, cc, tc, ts, clicked):
     return ret, clicked
 
 def collision_test(player, tiles):
-    touching = []
+    collision_list = []
     for row in tiles:
         for tile in row:
             if player.colliderect(tile[0]):
-                touching.append(tile)
-    return touching
+                collision_list.append(tile)
+    return collision_list

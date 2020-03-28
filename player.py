@@ -5,7 +5,7 @@ import blocks
 def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn, new_level, d):
     if new_level:
         player_rect.x, player_rect.y = spawn[0], spawn[1]
-    new_level = False
+        new_level = False
 
     keys = pygame.key.get_pressed()
     movement[0] = False
@@ -21,14 +21,11 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn
         yChange = -10
         movement[2] = True
 
-    if keys[pygame.K_DOWN] and movement[2] == False and d != "False":
-        if s[1] == 0:
-            s[1] = d + 1
-        else:
-            s[1] = d
-        new_level = True
-        player_rect.x = -100
-        player_rect.y = -100
+    if keys[pygame.K_DOWN]:
+        movement[3] = True
+    else:
+        movement[3] = False
+
     yChange += 0.5
     if yChange == 0:
         ignore = True
@@ -70,6 +67,8 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn
             player_rect, s, new_level, yChange, xChange, ignore = blocks.portal(player_rect, s, new_level, yChange, xChange, ignore)
         if tile[1] == 4 or tile[1] == 5:
             player_rect, yChange, xChange, ignore = blocks.lava(player_rect, spawn, yChange, xChange, ignore)
+        if d > -1 and tile[1] == 7:
+            player_rect, s = blocks.door(player_rect, s, d, tile, movement)
 
 
     # Test vertical collisions
@@ -82,8 +81,10 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn
             player_rect, s, new_level, yChange, xChange, ignore = blocks.portal(player_rect, s, new_level, yChange, xChange, ignore)
         if tile[1] == 4 or tile[1] == 5:
             player_rect, yChange, xChange, ignore = blocks.lava(player_rect, spawn, yChange, xChange, ignore)
+        if d > -1 and tile[1] == 7:
+            player_rect, s = blocks.door(player_rect, s, d, tile, movement)
 
     if player_rect.y > 700:
         player_rect.x, player_rect.y = spawn[0], spawn[1]
 
-    return player_rect, yChange, xChange, ignore, s, new_level
+    return player_rect, yChange, xChange, ignore, s, new_level, movement

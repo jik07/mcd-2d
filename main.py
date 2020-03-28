@@ -42,11 +42,11 @@ xChange = 0
 ignore = False
 s = [-1, 0]
 player_rect = pygame.Rect(0, 0, 40, 40)
-player_movement = [False, False, False]
+player_movement = [False, False, False, False]
 running = True
 spawn = [0, 0]
 new_level = True
-d = "False"
+d = -1
 while running:
     if s[0] == -2:
         s = end(screen, 1000, s)
@@ -63,7 +63,7 @@ while running:
     screen.fill((51, 153, 255))
 
     scroll, scroll_int, tile_rects, player_rect, spawn, d = move_background(screen, scroll, levels[s[0]][s[1]], player_rect, tiles, textures, spawn, d)
-    player_rect, yChange, xChange, ignore, s, new_level = move_player(player_rect, yChange, xChange, ignore, tile_rects, player_movement, s, spawn, new_level, d)
+    player_rect, yChange, xChange, ignore, s, new_level, player_movement = move_player(player_rect, yChange, xChange, ignore, tile_rects, player_movement, s, spawn, new_level, d)
 
     if s[0] >= len(levels):
         s[0] = -2
