@@ -35,12 +35,15 @@ def lava(player_rect, spawn, yChange, xChange, ignore):
     ignore = False
     return player_rect, yChange, xChange, ignore
 
-def door(player_rect, s, d, tile, movement):
+def door(player_rect, s, d, movement, through_door):
     if movement[3]:
         if s[1] == 0:
             s[1] = d + 1
         else:
+            d = s[1]-1
+            print(d)
             s[1] = 0
+        through_door[0] = True
         player_rect.y = 1000
         player_rect.x = 1000
-    return player_rect, s
+    return player_rect, s, d

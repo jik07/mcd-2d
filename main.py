@@ -46,6 +46,7 @@ player_movement = [False, False, False, False]
 running = True
 spawn = [0, 0]
 new_level = True
+through_door = [False, 0, 0]
 d = -1
 while running:
     if s[0] == -2:
@@ -62,8 +63,8 @@ while running:
 
     screen.fill((51, 153, 255))
 
-    scroll, scroll_int, tile_rects, player_rect, spawn, d = move_background(screen, scroll, levels[s[0]][s[1]], player_rect, tiles, textures, spawn, d)
-    player_rect, yChange, xChange, ignore, s, new_level, player_movement = move_player(player_rect, yChange, xChange, ignore, tile_rects, player_movement, s, spawn, new_level, d)
+    scroll, scroll_int, tile_rects, player_rect, spawn, d, through_door = move_background(screen, scroll, levels[s[0]][s[1]], player_rect, tiles, textures, spawn, d, through_door, s)
+    player_rect, yChange, xChange, ignore, s, new_level, player_movement, through_door = move_player(player_rect, yChange, xChange, ignore, tile_rects, player_movement, s, spawn, new_level, d, through_door)
 
     if s[0] >= len(levels):
         s[0] = -2
