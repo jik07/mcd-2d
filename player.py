@@ -62,7 +62,6 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn
         if xChange < -8:
             xChange = -7.5
 
-    player_rect, s, d = blocks.door(player_rect, s, d, movement, through_door)
     # Test horizontal collisions
     player_rect.x += xChange
     collision_list = collision_test(player_rect,tiles)
@@ -73,6 +72,8 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn
             player_rect, s, new_level, yChange, xChange, ignore = blocks.portal(player_rect, s, new_level, yChange, xChange, ignore)
         if tile[1] == 4 or tile[1] == 5:
             player_rect, yChange, xChange, ignore = blocks.lava(player_rect, spawn, yChange, xChange, ignore)
+        if tile[1] == 7 and player_rect.left > tile[0].left and player_rect.right < tile[0].right:
+            player_rect, s, d = blocks.door(player_rect, s, d, movement, through_door)
 
 
     # Test vertical collisions
@@ -85,8 +86,10 @@ def move_player(player_rect, yChange, xChange, ignore, tiles, movement, s, spawn
             player_rect, s, new_level, yChange, xChange, ignore = blocks.portal(player_rect, s, new_level, yChange, xChange, ignore)
         if tile[1] == 4 or tile[1] == 5:
             player_rect, yChange, xChange, ignore = blocks.lava(player_rect, spawn, yChange, xChange, ignore)
+        if tile[1] == 8:
+            player_rect, s, d = blocks.door(player_rect, s, d, movement, through_door)
 
     if player_rect.y > 700:
         player_rect.x, player_rect.y = spawn[0], spawn[1]
 
-    return player_rect, yChange, xChange, ignore, s, new_level, movement, through_door
+    return player_rect, yChange, xChange, ignore, s, new_level, movement, through_door, d

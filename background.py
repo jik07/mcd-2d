@@ -33,8 +33,8 @@ def move_background(screen, scroll, level, player_rect, tiles, textures, spawn, 
                 tile_rects[y].append([pygame.Rect(x * height, y * height, height, height), tile])
             elif tile == 7:
                 rect = pygame.Rect(x * height, y * height, height*2, height*2)
-                
-                if s[1] == 0 and through_door[0]:
+
+                if through_door[0] and s[1] == 0:
                     if d == num_d:
                         through_door[1] = rect.x + 20
                         through_door[2] = rect.y
